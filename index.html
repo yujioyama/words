@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yuji's Japanese Words</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+body{margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Layout: a single column word list, like the subtitles in the videos — Japanese word in mint, English phrase in yellow */
+:root {
+  --bg: #f3f6f5;
+  --card: #ffffff;
+  --fg: #1c2321;
+  --muted: #5b6763;
+  --line: #dde5e2;
+  --mint: #1f8f75;
+  --mint-soft: #dcf2ec;
+  --yellow: #f2d64b;
+  --yellow-ink: #3a3200;
+  --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111715; --card: #18201d; --fg: #e7eeeb; --muted: #9aa8a3; --line: #27322e;
+    --mint: #6fd6bb; --mint-soft: #1d3530; --yellow: #e6cb45; --yellow-ink: #2a2400;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111715; --card: #18201d; --fg: #e7eeeb; --muted: #9aa8a3; --line: #27322e;
+  --mint: #6fd6bb; --mint-soft: #1d3530; --yellow: #e6cb45; --yellow-ink: #2a2400;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body);
+  font-size: 16px; line-height: 1.55;
+}
+.wrap {
+  max-width: 640px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 56px;
+  display: grid; gap: 28px;
+}
+header { display: grid; gap: 10px; }
+.handle { font-size: 14px; color: var(--muted); letter-spacing: .02em; }
+h1 { font-family: var(--font-jp); font-weight: 700; font-size: clamp(28px, 7vw, 38px); line-height: 1.2; margin: 0; text-wrap: balance; }
+h1 .jp { color: var(--mint); }
+.lede { margin: 0; color: var(--muted); max-width: 60ch; }
+.lede span { display: block; font-family: var(--font-jp); font-size: 14px; margin-top: 2px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.links a, .links span {
+  display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px;
+  border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none;
+}
+.links a { background: var(--fg); color: var(--bg); }
+.links a:focus-visible, input:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+.links span { border: 1px dashed var(--line); color: var(--muted); }
+.tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+input {
+  flex: 1 1 220px; min-width: 0; font: inherit; padding: 10px 14px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--card); color: var(--fg);
+}
+.count { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+li { background: var(--card); padding: 18px 20px; display: grid; gap: 6px; }
+.top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.word { font-family: var(--font-jp); font-weight: 700; font-size: 26px; line-height: 1.2; }
+.romaji { color: var(--mint); font-weight: 600; letter-spacing: .01em; }
+.meaning { font-weight: 500; }
+.from { font-size: 14px; color: var(--muted); }
+.from mark { background: var(--yellow); color: var(--yellow-ink); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+.watch { justify-self: start; font-size: 14px; font-weight: 600; color: var(--mint); text-decoration: none; padding-top: 2px; }
+.watch:hover { text-decoration: underline; }
+.watch:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; border-radius: 4px; }
+.empty { color: var(--muted); text-align: center; padding: 24px; }
+footer { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="handle">@yuji_unofficial3</div>
+    <h1>One <span class="jp">Japanese word</span> in every video.</h1>
+    <p class="lede">Every word from my videos, in one place. Plus the English phrase that led me there.
+      <span>動画に出てきた日本語と、きっかけになった英語フレーズのまとめ。</span></p>
+    <nav class="links" aria-label="Accounts">
+      <a href="https://www.tiktok.com/@yuji_unofficial3" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.instagram.com/yuji_unofficial3/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@yuji_unofficial3" target="_blank" rel="noopener">YouTube</a>
+    </nav>
+  </header>
+
+  <div class="tools">
+    <label for="q" class="count" style="position:absolute;left:-9999px">Search words</label>
+    <input id="q" type="search" placeholder="Search: ring, 指輪, yubiwa…" autocomplete="off">
+    <span class="count" id="count"></span>
+  </div>
+
+  <ol id="list"></ol>
+
+  <footer>Newest first. Meanings are the way I use these words — some have more.</footer>
+</div>
+
+<script>
+const WORDS = [
+  ["解凍","kaitō","thawing; also unzipping a file","decompress","I thought decompress meant floating away like a balloon.","7702440689073769735"],
+  ["指輪","yubiwa","a ring (on your finger)","ring","In Australia, I kept hearing “I rang her.” I pictured a ring.","7701684940987026695"],
+  ["撮影","satsuei","filming, a shoot","hot take","I thought “hot take” was something spicy.","7701682824843218183"],
+  ["迷子","maigo","lost, like a lost child","winded","I thought “winded” meant winding.","7701680197413735698"],
+  ["追い込み","oikomi","the final push before a deadline","crunch time","My crunch time has a flavor. It's Super Cup.","7700934918381096210"],
+  ["スクランブル交差点","sukuranburu kōsaten","scramble crossing","scramble","I'm the only one scrambling at the scramble crossing.","7700905485263719681"],
+  ["持ち帰り","mochikaeri","taking it home; takeout","on the fly","My answers on the fly end up as takeout.","7700428710830165256"],
+  ["傘立て","kasatate","umbrella stand","umbrella stand","My umbrella is too nice to relax.","7700424195263466770"],
+  ["撮れ高","toredaka","how much good footage you got","it makes better TV","The thought was perfect. In Japanese.","7700579772102987009"],
+  ["ランク","ranku","rank, level","rank","I thought rank was a compliment. Then I remembered a fridge.","7700416493464538376"],
+  ["さくらんぼ","sakuranbo","cherry","cherry-pick","The one day I didn't cherry-pick.","7700414344235879698"],
+  ["注射","chūsha","injection, shot","jab","In Australia, a jab isn't always a punch.","7700412727654632722"],
+  ["内緒","naisho","a secret","you don't say","Thought “you don't say” meant “shh.” It doesn't.","7700145055427792146"],
+  ["頑固","ganko","stubborn","budge","Thought “budge” was “badge.” Turns out it's me.","7700147345983409415"],
+  ["居眠り","inemuri","dozing off in public","inemuri","Over an hour to Tokyo. I sleep almost every time. Carefully.","7700148895275388168"],
+  ["エレベーターガール","erebētā gāru","elevator girl","press close","I like pressing close. Until I'm the one by the buttons.","7700054520876780818"],
+  ["定時","teiji","official finish time","knock off","I thought knock off meant something else.","7700051667252727058"],
+  ["シースルー","shīsurū","see-through","sheer","Heard “sheer dress” on Project Runway. A complete dress?","7700034654094560520"],
+  ["ランチ","ranchi","lunch","ranch","Told an American kid “I like lice.” Then I said yeah.","7699646609151331590"],
+  ["鍋","nabe","Japanese hot pot","nab","“Nab” sounds like dinner to me.","7698904594805476614"],
+  ["正座","seiza","sitting formally on your knees","on top of it","Pictured someone sitting seiza on top of it.","7698533271264628020"],
+  ["ハンカチ","hankachi","handkerchief","hankering","Hankering sounds like hankachi to me.","7697434299322076417"],
+  ["ウコン","ukon","turmeric","turmeric","In Australia, turmeric is a latte. In Japan, it's before tequila.","7695935708434877697"],
+  ["レンコン","renkon","lotus root","reckon","Every time an Australian says “I reckon,” I see lotus root.","7695215427353365767"],
+  ["遠征","ensei","an expedition; a long trip out","door to door","On the map, Chiba is right next to Tokyo. Door to door, it's an ensei.","7694957921762905396"]
+];
+
+const list = document.getElementById('list');
+const count = document.getElementById('count');
+const q = document.getElementById('q');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+
+function render(){
+  const term = norm(q.value.trim());
+  const rows = WORDS.filter(w => !term || norm(w.join(' ')).includes(term));
+  list.innerHTML = rows.length ? rows.map(([jp,ro,mean,en,note,id]) => `
+    <li>
+      <div class="top"><span class="word" lang="ja">${esc(jp)}</span><span class="romaji">${esc(ro)}</span></div>
+      <div class="meaning">${esc(mean)}</div>
+      <div class="from">From <mark>${esc(en)}</mark> · ${esc(note)}</div>
+      ${id ? `<a class="watch" href="https://www.tiktok.com/@yuji_unofficial3/video/${id}" target="_blank" rel="noopener">Watch the video ↗</a>` : ''}
+    </li>`).join('') : '<li class="empty">No word matches that yet.</li>';
+  count.textContent = `${rows.length} of ${WORDS.length} words`;
+}
+q.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
