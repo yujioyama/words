@@ -4,6 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Yuji's Japanese Words</title>
+<!-- Google Analytics (GA4): set GA_ID to the measurement ID (G-...). Empty = off. -->
+<script>
+const GA_ID = '';
+if (GA_ID) {
+  const t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(t);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', GA_ID);
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Figtree:wght@400;500;600&display=swap">
@@ -186,12 +200,26 @@ function render(){
       <div class="top"><span class="word" lang="ja">${esc(jp)}</span><span class="romaji">${esc(ro)}</span></div>
       <div class="meaning">${esc(mean)}</div>
       <div class="from">From <mark>${esc(en)}</mark> · ${esc(note)}</div>
-      ${id ? `<a class="watch" href="https://www.tiktok.com/@yuji_unofficial3/video/${id}" target="_blank" rel="noopener">Watch the video ↗</a>` : ''}
+      ${id ? `<a class="watch" data-word="${esc(ro)}" href="https://www.tiktok.com/@yuji_unofficial3/video/${id}" target="_blank" rel="noopener">Watch the video ↗</a>` : ''}
     </li>`).join('') : '<li class="empty">No word matches that yet.</li>';
   count.textContent = `${rows.length} of ${WORDS.length} words`;
 }
 q.addEventListener('input', render);
 render();
+
+// Analytics: which word's video gets opened, and what people search for
+list.addEventListener('click', e => {
+  const a = e.target.closest('a.watch');
+  if (a && window.gtag) gtag('event', 'watch_video', { word: a.dataset.word });
+});
+let searchTimer;
+q.addEventListener('input', () => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const term = q.value.trim();
+    if (term.length >= 2 && window.gtag) gtag('event', 'search', { search_term: term });
+  }, 1200);
+});
 </script>
 </body>
 </html>
