@@ -24,17 +24,9 @@ if (GA_ID) {
 <style>
 body{margin:0}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-/* Layout: a single column word list, like the subtitles in the videos — Japanese word in mint, English phrase in yellow */
 :root {
-  --bg: #f3f6f5;
-  --card: #ffffff;
-  --fg: #1c2321;
-  --muted: #5b6763;
-  --line: #dde5e2;
-  --mint: #1f8f75;
-  --mint-soft: #dcf2ec;
-  --yellow: #f2d64b;
-  --yellow-ink: #3a3200;
+  --bg: #f3f6f5; --card: #ffffff; --fg: #1c2321; --muted: #5b6763; --line: #dde5e2;
+  --mint: #1f8f75; --mint-soft: #dcf2ec; --yellow: #f2d64b; --yellow-ink: #3a3200;
   --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-body: "Figtree", "Helvetica Neue", Arial, sans-serif;
 }
@@ -50,16 +42,13 @@ body{margin:0}
   --mint: #6fd6bb; --mint-soft: #1d3530; --yellow: #e6cb45; --yellow-ink: #2a2400;
   color-scheme: dark;
 }
-body {
-  background: var(--bg); color: var(--fg); font-family: var(--font-body);
-  font-size: 16px; line-height: 1.55;
-}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
 .wrap {
   max-width: 640px; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 40px 56px;
-  display: grid; gap: 28px;
+  padding-block: 32px 56px;
+  display: grid; gap: 24px;
 }
 header { display: grid; gap: 10px; }
 .handle { font-size: 14px; color: var(--muted); letter-spacing: .02em; }
@@ -68,74 +57,117 @@ h1 .jp { color: var(--mint); }
 .lede { margin: 0; color: var(--muted); max-width: 60ch; }
 .lede span { display: block; font-family: var(--font-jp); font-size: 14px; margin-top: 2px; }
 .links { display: flex; flex-wrap: wrap; gap: 8px; }
-.links a, .links span {
-  display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px;
-  border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none;
-}
-.links a { background: var(--fg); color: var(--bg); }
-.links a:focus-visible, input:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
-.links span { border: 1px dashed var(--line); color: var(--muted); }
-.tools { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-input {
-  flex: 1 1 220px; min-width: 0; font: inherit; padding: 10px 14px; border-radius: 10px;
-  border: 1px solid var(--line); background: var(--card); color: var(--fg);
-}
-.count { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-li { background: var(--card); padding: 18px 20px; display: grid; gap: 6px; }
-.top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.word { font-family: var(--font-jp); font-weight: 700; font-size: 26px; line-height: 1.2; }
-.romaji { color: var(--mint); font-weight: 600; letter-spacing: .01em; }
-.meaning { font-weight: 500; }
-.from { font-size: 14px; color: var(--muted); }
-.from mark { background: var(--yellow); color: var(--yellow-ink); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
-.watch { justify-self: start; font-size: 14px; font-weight: 600; color: var(--mint); text-decoration: none; padding-top: 2px; }
-.watch:hover { text-decoration: underline; }
-.watch:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; border-radius: 4px; }
-.empty { color: var(--muted); text-align: center; padding: 24px; }
-footer { font-size: 13px; color: var(--muted); }
-.about { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 14px; }
-.about h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.links a { display: inline-flex; align-items: center; padding: 9px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none; background: var(--fg); color: var(--bg); }
+a:focus-visible, input:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+
+.about { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 12px; }
+.about .section-title { margin: 0; }
+.follow-lead { font-weight: 600; margin-top: 4px !important; }
+/* (old folded about styles, unused) */
+.about { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+.about > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; justify-content: space-between; gap: 12px; font-weight: 600; }
+.about > summary::-webkit-details-marker { display: none; }
+.about > summary::after { content: "Read ↓"; font-size: 13px; color: var(--mint); font-weight: 600; }
+.about[open] > summary::after { content: "Close ↑"; }
+.about .body { padding: 0 18px 18px; display: grid; gap: 12px; }
 .about p { margin: 0; }
 .about .ja { font-family: var(--font-jp); font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+/* Start here */
+.section-title { margin: 0 0 10px; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.starters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.starter { background: var(--mint-soft); border-radius: 12px; padding: 12px; text-decoration: none; color: var(--fg); display: grid; gap: 2px; min-width: 0; }
+.starter .w { font-family: var(--font-jp); font-weight: 700; font-size: 20px; line-height: 1.25; }
+.starter .r { font-size: 13px; color: var(--mint); font-weight: 600; }
+.starter .e { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+@media (max-width: 380px) { .starters { grid-template-columns: 1fr; } }
+
+/* Tools */
+.tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+input { flex: 1 1 200px; min-width: 0; font: inherit; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+.sort { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.sort button { font: inherit; font-size: 14px; font-weight: 600; padding: 9px 12px; border: 0; background: var(--card); color: var(--muted); cursor: pointer; }
+.sort button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.count { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; width: 100%; }
+
+/* Compact list: one line per word, tap to open */
+ol { list-style: none; margin: 0; padding: 0; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+li + li { border-top: 1px solid var(--line); }
+li details > summary {
+  list-style: none; cursor: pointer; padding: 10px 16px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px;
+}
+li details > summary::-webkit-details-marker { display: none; }
+li details > summary:hover { background: var(--bg); }
+.left { min-width: 0; display: grid; gap: 1px; }
+.line1 { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.word { font-family: var(--font-jp); font-weight: 700; font-size: 19px; line-height: 1.3; }
+.romaji { color: var(--mint); font-weight: 600; font-size: 14px; }
+.meaning { font-size: 14px; color: var(--muted); }
+.from { display: grid; justify-items: end; gap: 2px; }
+.from-label { font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+.en { background: var(--yellow); color: var(--yellow-ink); padding: 2px 8px; border-radius: 6px; font-weight: 600; font-size: 13px; white-space: nowrap; max-width: 40vw; overflow: hidden; text-overflow: ellipsis; }
+.more { padding: 0 16px 14px; display: grid; gap: 6px; }
+.note { margin: 0; font-size: 15px; }
+.watch { justify-self: start; font-size: 14px; font-weight: 600; color: var(--mint); text-decoration: none; }
+.watch:hover { text-decoration: underline; }
+li[id]:target { background: var(--mint-soft); }
+.colhead { display: flex; justify-content: space-between; gap: 12px; margin: 12px 4px 6px; font-size: 12px; color: var(--muted); }
+.colhead span:last-child { text-align: right; }
+.moreBtn { margin-top: 12px; width: 100%; font: inherit; font-weight: 600; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; }
+.empty { color: var(--muted); text-align: center; padding: 24px; }
+footer { font-size: 13px; color: var(--muted); }
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <header>
-    <div class="handle">@yuji_unofficial3</div>
+    <div class="handle">@yuji_unofficial3 · Yuji, living in Japan</div>
     <h1>One <span class="jp">Japanese word</span> in every video.</h1>
     <p class="lede">Every word from my videos, in one place. Plus the English phrase that led me there.
       <span>動画に出てきた日本語と、きっかけになった英語フレーズのまとめ。</span></p>
+  </header>
+
+
+  <section aria-labelledby="start-title">
+    <h2 class="section-title" id="start-title">Start here / まずはこれ</h2>
+    <div class="starters" id="starters"></div>
+  </section>
+
+  <section aria-labelledby="all-title">
+    <h2 class="section-title" id="all-title">All words / ぜんぶ</h2>
+    <div class="tools">
+      <label for="q" style="position:absolute;left:-9999px">Search words</label>
+      <input id="q" type="search" placeholder="Search: ring, 指輪, yubiwa…" autocomplete="off">
+      <div class="sort" role="group" aria-label="Sort">
+        <button type="button" data-sort="new" aria-pressed="true">Newest</button>
+        <button type="button" data-sort="az" aria-pressed="false">A–Z</button>
+      </div>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="colhead"><span>Japanese word / 日本語</span><span>English that led me here / きっかけの英語</span></div>
+    <ol id="list"></ol>
+    <button type="button" class="moreBtn" id="moreBtn" hidden></button>
+  </section>
+
+  <section class="about" aria-labelledby="about-title">
+    <h2 class="section-title" id="about-title">Who's talking / 話してる人</h2>
+    <p><strong>Hi, I'm Yuji.</strong> I'm Japanese. I was born here, and I still live here. I'm a software engineer.
+      I spent one year at a university in the US, and one year in Australia on a working holiday.
+      I started practicing speaking English in university, and kept at it until I could actually talk.</p>
+    <p class="ja" lang="ja">はじめまして、ゆうじです。日本生まれ、日本育ち、今も日本に住んでいます。仕事はソフトウェアエンジニア。
+      大学で1年アメリカに留学して、ワーホリで1年オーストラリアにいました。
+      英語は大学生のころから話す練習を頑張って、話せるようになりました。</p>
+    <p class="follow-lead">A new word, twice a day. / 新しい単語、1日2回。</p>
     <nav class="links" aria-label="Accounts">
       <a href="https://www.tiktok.com/@yuji_unofficial3" target="_blank" rel="noopener">TikTok</a>
       <a href="https://www.instagram.com/yuji_unofficial3/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.youtube.com/@yuji_unofficial3" target="_blank" rel="noopener">YouTube</a>
     </nav>
-  </header>
-
-  <section class="about" aria-labelledby="about-title">
-    <h2 id="about-title">Hi, I'm Yuji.</h2>
-    <p>I'm Japanese. I was born here, and I still live here. I'm a software engineer.
-      I spent one year at a university in the US, and one year in Australia on a working holiday.
-      My videos start with an English word I picked up. Somewhere in the story, a Japanese word sneaks in.
-      My English came from both countries. It still hasn't decided which one it is.</p>
-    <p class="ja" lang="ja">はじめまして、ゆうじです。日本生まれ、日本育ち、今も日本に住んでいます。仕事はソフトウェアエンジニア。
-      大学で1年アメリカに留学して、ワーホリで1年オーストラリアにいました。
-      動画は、覚えた英単語から話を作っています。話のどこかに、日本語がひとつまぎれています。
-      英語はアメリカとオーストラリアで覚えたので、どっちつかずの英語になっています。</p>
   </section>
 
-  <div class="tools">
-    <label for="q" class="count" style="position:absolute;left:-9999px">Search words</label>
-    <input id="q" type="search" placeholder="Search: ring, 指輪, yubiwa…" autocomplete="off">
-    <span class="count" id="count"></span>
-  </div>
-
-  <ol id="list"></ol>
-
-  <footer>Newest first. Meanings are the way I use these words — some have more.</footer>
+  <footer>Tap a word to see the story and the video. Meanings are the way I use these words — some have more.</footer>
 </div>
 
 <script>
@@ -184,41 +216,74 @@ const WORDS = [
   ["レンコン","renkon","lotus root","reckon","Every time an Australian says “I reckon,” I see lotus root.","7695215427353365767"],
   ["遠征","ensei","an expedition; a long trip out","door to door","On the map, Chiba is right next to Tokyo. Door to door, it's an ensei.","7694957921762905396"]
 ];
+// "Start here" picks — edit this list by romaji
+const STARTERS = ["renkon", "hankachi", "ensei"];
 
 const list = document.getElementById('list');
 const count = document.getElementById('count');
 const q = document.getElementById('q');
+const starters = document.getElementById('starters');
+let sort = 'new';
+const FIRST = 8; let shown = FIRST;
+const moreBtn = document.getElementById('moreBtn');
 
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function slug(ro){return 'w-' + norm(ro).replace(/[^a-z0-9]+/g,'-');}
+
+starters.innerHTML = STARTERS.map(r => WORDS.find(w => w[1] === r)).filter(Boolean).map(([jp,ro,mean,en]) => `
+  <a class="starter" href="#${slug(ro)}" data-open="${slug(ro)}">
+    <span class="w" lang="ja">${esc(jp)}</span>
+    <span class="r">${esc(ro)}</span>
+    <span class="e">from “${esc(en)}”</span>
+  </a>`).join('');
 
 function render(){
   const term = norm(q.value.trim());
-  const rows = WORDS.filter(w => !term || norm(w.join(' ')).includes(term));
+  let rows = WORDS.filter(w => !term || norm(w.join(' ')).includes(term));
+  if (sort === 'az') rows = [...rows].sort((a,b) => norm(a[1]).localeCompare(norm(b[1])));
+  const total = rows.length;
+  if (!term) rows = rows.slice(0, shown);
+  moreBtn.hidden = rows.length >= total;
+  moreBtn.textContent = `See all ${total} words / 全部見る`;
   list.innerHTML = rows.length ? rows.map(([jp,ro,mean,en,note,id]) => `
-    <li>
-      <div class="top"><span class="word" lang="ja">${esc(jp)}</span><span class="romaji">${esc(ro)}</span></div>
-      <div class="meaning">${esc(mean)}</div>
-      <div class="from">From <mark>${esc(en)}</mark> · ${esc(note)}</div>
-      ${id ? `<a class="watch" data-word="${esc(ro)}" href="https://www.tiktok.com/@yuji_unofficial3/video/${id}" target="_blank" rel="noopener">Watch the video ↗</a>` : ''}
+    <li id="${slug(ro)}">
+      <details>
+        <summary>
+          <span class="left">
+            <span class="line1"><span class="word" lang="ja">${esc(jp)}</span><span class="romaji">${esc(ro)}</span></span>
+            <span class="meaning">${esc(mean)}</span>
+          </span>
+          <span class="from"><span class="from-label">from</span><span class="en" title="${esc(en)}">${esc(en)}</span></span>
+        </summary>
+        <div class="more">
+          <p class="note">${esc(note)}</p>
+          ${id ? `<a class="watch" data-word="${esc(ro)}" href="https://www.tiktok.com/@yuji_unofficial3/video/${id}" target="_blank" rel="noopener">Watch the video ↗</a>` : ''}
+        </div>
+      </details>
     </li>`).join('') : '<li class="empty">No word matches that yet.</li>';
-  count.textContent = `${rows.length} of ${WORDS.length} words`;
+  count.textContent = `${term ? rows.length : WORDS.length} words`;
 }
+
 q.addEventListener('input', render);
+moreBtn.addEventListener('click', () => { shown = WORDS.length; render(); });
+document.querySelectorAll('.sort button').forEach(b => b.addEventListener('click', () => {
+  sort = b.dataset.sort;
+  document.querySelectorAll('.sort button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  render();
+}));
+starters.addEventListener('click', e => {
+  const a = e.target.closest('[data-open]'); if (!a) return;
+  if (q.value) q.value = '';
+  shown = WORDS.length; render();
+  const d = document.querySelector(`#${a.dataset.open} details`); if (d) d.open = true;
+});
 render();
 
 // Analytics: which word's video gets opened, and what people search for
 list.addEventListener('click', e => {
   const a = e.target.closest('a.watch');
   if (a && window.gtag) gtag('event', 'watch_video', { word: a.dataset.word });
-});
-let searchTimer;
-q.addEventListener('input', () => {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    const term = q.value.trim();
-    if (term.length >= 2 && window.gtag) gtag('event', 'search', { search_term: term });
-  }, 1200);
 });
 </script>
 </body>
