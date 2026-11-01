@@ -95,9 +95,12 @@ ol { list-style: none; margin: 0; padding: 0; background: var(--card); border: 1
 li + li { border-top: 1px solid var(--line); }
 li details > summary {
   list-style: none; cursor: pointer; padding: 10px 16px;
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 12px;
 }
 li details > summary::-webkit-details-marker { display: none; }
+li details > summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg) translateY(-3px); transition: transform .15s; }
+li details[open] > summary::after { transform: rotate(-135deg) translateY(-2px); }
+li details[open] { background: var(--bg); }
 li details > summary:hover { background: var(--bg); }
 .left { min-width: 0; display: grid; gap: 1px; }
 .line1 { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
@@ -146,7 +149,6 @@ footer { font-size: 13px; color: var(--muted); }
       </div>
       <span class="count" id="count"></span>
     </div>
-    <div class="colhead"><span>Japanese word / 日本語</span><span>English that led me here / きっかけの英語</span></div>
     <ol id="list"></ol>
     <button type="button" class="moreBtn" id="moreBtn" hidden></button>
   </section>
@@ -262,7 +264,7 @@ function render(){
         </div>
       </details>
     </li>`).join('') : '<li class="empty">No word matches that yet.</li>';
-  count.textContent = `${term ? rows.length : WORDS.length} words`;
+  count.textContent = `${term ? rows.length : WORDS.length} words · tap to open / タップで開きます`;
 }
 
 q.addEventListener('input', render);
