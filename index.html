@@ -235,7 +235,7 @@ starters.innerHTML = STARTERS.map(r => WORDS.find(w => w[1] === r)).filter(Boole
   <a class="starter" href="#${slug(ro)}" data-open="${slug(ro)}">
     <span class="w" lang="ja">${esc(jp)}</span>
     <span class="r">${esc(ro)}</span>
-    <span class="e">from “${esc(en)}”</span>
+    <span class="e">English: ${esc(en)}</span>
   </a>`).join('');
 
 function render(){
@@ -254,7 +254,7 @@ function render(){
             <span class="line1"><span class="word" lang="ja">${esc(jp)}</span><span class="romaji">${esc(ro)}</span></span>
             <span class="meaning">${esc(mean)}</span>
           </span>
-          <span class="from"><span class="from-label">from</span><span class="en" title="${esc(en)}">${esc(en)}</span></span>
+          <span class="from"><span class="from-label">English</span><span class="en" title="${esc(en)}">${esc(en)}</span></span>
         </summary>
         <div class="more">
           <p class="note">${esc(note)}</p>
