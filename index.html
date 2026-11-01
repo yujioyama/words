@@ -52,6 +52,10 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-body); f
 }
 header { display: grid; gap: 10px; }
 .handle { font-size: 14px; color: var(--muted); letter-spacing: .02em; }
+.handle a { color: var(--mint); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.handle a:hover { text-decoration: underline; }
+html { scroll-behavior: smooth; }
+#about { scroll-margin-top: 16px; }
 h1 { font-family: var(--font-jp); font-weight: 700; font-size: clamp(28px, 7vw, 38px); line-height: 1.2; margin: 0; text-wrap: balance; }
 h1 .jp { color: var(--mint); }
 .lede { margin: 0; color: var(--muted); max-width: 60ch; }
@@ -126,7 +130,7 @@ footer { font-size: 13px; color: var(--muted); }
 
 <div class="wrap">
   <header>
-    <div class="handle">@yuji_unofficial3 · Yuji, living in Japan</div>
+    <div class="handle">@yuji_unofficial3 · Yuji, living in Japan · <a href="#about">About me ↓</a></div>
     <h1>One <span class="jp">Japanese word</span> in every video.</h1>
     <p class="lede">Every word from my videos, in one place. Plus the English phrase that led me there.
       <span>動画に出てきた日本語と、きっかけになった英語フレーズのまとめ。</span></p>
@@ -153,7 +157,7 @@ footer { font-size: 13px; color: var(--muted); }
     <button type="button" class="moreBtn" id="moreBtn" hidden></button>
   </section>
 
-  <section class="about" aria-labelledby="about-title">
+  <section class="about" id="about" aria-labelledby="about-title">
     <h2 class="section-title" id="about-title">Who's talking / 話してる人</h2>
     <p><strong>Hi, I'm Yuji.</strong> I'm Japanese. I was born here, and I still live here. I'm a software engineer.
       I spent one year at a university in the US, and one year in Australia on a working holiday.
