@@ -80,6 +80,10 @@ li { background: var(--card); padding: 18px 20px; display: grid; gap: 6px; }
 .watch:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; border-radius: 4px; }
 .empty { color: var(--muted); text-align: center; padding: 24px; }
 footer { font-size: 13px; color: var(--muted); }
+.about { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 14px; }
+.about h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.about p { margin: 0; }
+.about .ja { font-family: var(--font-jp); font-size: 14px; color: var(--muted); line-height: 1.75; }
 </style>
 </head>
 <body>
@@ -96,6 +100,18 @@ footer { font-size: 13px; color: var(--muted); }
       <a href="https://www.youtube.com/@yuji_unofficial3" target="_blank" rel="noopener">YouTube</a>
     </nav>
   </header>
+
+  <section class="about" aria-labelledby="about-title">
+    <h2 id="about-title">Hi, I'm Yuji.</h2>
+    <p>I'm Japanese. I was born here, and I still live here. I'm a software engineer.
+      I spent one year at a university in the US, and one year in Australia on a working holiday.
+      My videos start with an English word I picked up. Somewhere in the story, a Japanese word sneaks in.
+      My English came from both countries. It still hasn't decided which one it is.</p>
+    <p class="ja" lang="ja">はじめまして、ゆうじです。日本生まれ、日本育ち、今も日本に住んでいます。仕事はソフトウェアエンジニア。
+      大学で1年アメリカに留学して、ワーホリで1年オーストラリアにいました。
+      動画は、覚えた英単語から話を作っています。話のどこかに、日本語がひとつまぎれています。
+      英語はアメリカとオーストラリアで覚えたので、どっちつかずの英語になっています。</p>
+  </section>
 
   <div class="tools">
     <label for="q" class="count" style="position:absolute;left:-9999px">Search words</label>
